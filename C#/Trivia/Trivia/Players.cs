@@ -31,5 +31,10 @@ namespace Trivia
             if (indexCurrPlayer == _players.Count) indexCurrPlayer = 0;
             CurrentPlayer = _players[indexCurrPlayer];
         }
+
+        public bool DidPlayerWin()
+        {
+            return CurrentPlayer.GoldCoins != 6;
+        }
     }
 }
