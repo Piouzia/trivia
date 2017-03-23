@@ -33,11 +33,6 @@ namespace Trivia
             return "Rock Question " + index;
         }
 
-        public void Add(string playerName)
-        {
-            _players.Add(playerName);
-        }
-
         public void Roll(int roll)
         {
             Console.WriteLine(_players.CurrentPlayer.Name + " is the current player");
