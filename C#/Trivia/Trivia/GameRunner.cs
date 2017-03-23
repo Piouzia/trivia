@@ -10,11 +10,13 @@ namespace Trivia
         {
             for (var i = 0; i < 10; i++)
             {
-                var aGame = new Game();
+                var thePlayers = new Players();
+                thePlayers.Add("Chet");
+                thePlayers.Add("Pat");
+                thePlayers.Add("Sue");
+                var aGame = new Game(thePlayers);
 
-                aGame.Add("Chet");
-                aGame.Add("Pat");
-                aGame.Add("Sue");
+                
 
                 Random rand = new Random(i);
 

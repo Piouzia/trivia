@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trivia
 {
-    class Players
+    public class Players
     {
         private readonly List<Player> _players = new List<Player>();
         public Player CurrentPlayer { get; private set; }

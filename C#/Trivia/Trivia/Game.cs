@@ -6,7 +6,7 @@ namespace Trivia
 {
     public class Game
     {
-        private readonly Players _players = new Players();
+        private readonly Players _players;
         private readonly Dictionary<int, string> _categories = new Dictionary<int, string>() {{0, "Pop"}, {1, "Science"}, {2, "Sports"}, {3, "Rock"}};
 
         LinkedList<string> popQuestions = new LinkedList<string>();
@@ -16,8 +16,9 @@ namespace Trivia
 
         private bool _isGettingOutOfPenaltyBox;
 
-        public Game()
+        public Game(Players p)
         {
+            _players = p;
             for (var i = 0; i < 50; i++)
             {
                 popQuestions.AddLast("Pop Question " + i);
@@ -118,12 +119,12 @@ namespace Trivia
                     _players.CurrentPlayer.WinAGoldCoin();
 
                     winner = DidPlayerWin();
-                    NextPlayer();
+                    _players.NextPlayer();
 
                     return winner;
                 }
 
-                NextPlayer();
+                _players.NextPlayer();
                 return true;
             }
 
@@ -131,7 +132,7 @@ namespace Trivia
             _players.CurrentPlayer.WinAGoldCoin();
 
             winner = DidPlayerWin();
-            NextPlayer();
+            _players.NextPlayer();
 
             return winner;
         }
@@ -142,7 +143,7 @@ namespace Trivia
             Console.WriteLine(_players.CurrentPlayer.Name + " was sent to the penalty box");
             _players.CurrentPlayer.GoToPenaltyBox();
 
-            NextPlayer();
+            _players.NextPlayer();
             return true;
         }
 
@@ -152,9 +153,5 @@ namespace Trivia
             return _players.CurrentPlayer.GoldCoins != 6;
         }
 
-        private void NextPlayer()
-        {
-            _players.NextPlayer();
-        }
     }
 }
