@@ -8,25 +8,48 @@ namespace Trivia
 {
     class Questions
     {
-        public string Type { get; private set; }
-        readonly LinkedList<string> _questionsList;
-        public Questions(string type)
-        {
-            Type = type;
-            _questionsList = new LinkedList<string>();
+        QuestionStack popQuestions;
+        QuestionStack scienceQuestions;
+        QuestionStack sportsQuestions;
+        QuestionStack rockQuestions;
 
+        public Questions()
+        {
+            popQuestions = new QuestionStack("Pop");
+            scienceQuestions = new QuestionStack("Science");
+            sportsQuestions = new QuestionStack("Sports");
+            rockQuestions = new QuestionStack("Rock");
         }
 
-        public void Add(string q)
+        public void GenerateQuestions()
         {
-            _questionsList.AddLast(q);
+            for (var i = 0; i < 50; i++)
+            {
+                popQuestions.Add(i);
+                scienceQuestions.Add(i);
+                sportsQuestions.Add(i);
+                rockQuestions.Add(i);
+            }
         }
 
-        public void PickQuestion()
+        public void AskQuestion(String type)
         {
-            Console.WriteLine(_questionsList.First());
-            _questionsList.RemoveFirst();
+            if (type == "Pop")
+            {
+                popQuestions.PickQuestion();
+            }
+            if (type == "Science")
+            {
+                scienceQuestions.PickQuestion();
+            }
+            if (type == "Sports")
+            {
+                sportsQuestions.PickQuestion();
+            }
+            if (type == "Rock")
+            {
+                rockQuestions.PickQuestion();
+            }
         }
-
     }
 }

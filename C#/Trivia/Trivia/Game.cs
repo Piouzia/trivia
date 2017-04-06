@@ -9,34 +9,31 @@ namespace Trivia
         private readonly Players _players;
         private readonly Dictionary<int, string> _categories = new Dictionary<int, string>() {{0, "Pop"}, {1, "Science"}, {2, "Sports"}, {3, "Rock"}};
 
-        Questions popQuestions = new Questions("Pop");
-        Questions scienceQuestions = new Questions("Science");
-        Questions sportsQuestions = new Questions("Sports");
-        Questions rockQuestions = new Questions("Rock");
+        /*QuestionStack popQuestions = new QuestionStack("Pop");
+        QuestionStack scienceQuestions = new QuestionStack("Science");
+        QuestionStack sportsQuestions = new QuestionStack("Sports");
+        QuestionStack rockQuestions = new QuestionStack("Rock");*/
+
+        Questions questions = new Questions();
 
         private bool _isGettingOutOfPenaltyBox;
 
         public Game(Players p)
         {
             _players = p;
-            GenerateQuestions();
+            questions.GenerateQuestions();
         }
 
-        private void GenerateQuestions()
+        /*private void GenerateQuestions()
         {
             for (var i = 0; i < 50; i++)
             {
-                popQuestions.Add("Pop Question " + i);
-                scienceQuestions.Add(("Science Question " + i));
-                sportsQuestions.Add(("Sports Question " + i));
-                rockQuestions.Add(CreateRockQuestion(i));
+                popQuestions.Add(i);
+                scienceQuestions.Add(i);
+                sportsQuestions.Add(i);
+                rockQuestions.Add(i);
             }
-        }
-
-        public string CreateRockQuestion(int index)
-        {
-            return "Rock Question " + index;
-        }
+        }*/
 
         public void Roll(int roll)
         {
@@ -80,22 +77,7 @@ namespace Trivia
 
         private void AskQuestion()
         {
-            if (CurrentCategory() == "Pop")
-            {
-                popQuestions.PickQuestion();
-            }
-            if (CurrentCategory() == "Science")
-            {
-                scienceQuestions.PickQuestion();
-            }
-            if (CurrentCategory() == "Sports")
-            {
-                sportsQuestions.PickQuestion();
-            }
-            if (CurrentCategory() == "Rock")
-            {
-                rockQuestions.PickQuestion();
-            }
+            questions.AskQuestion(CurrentCategory());
         }
 
 
