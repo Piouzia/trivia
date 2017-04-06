@@ -34,7 +34,7 @@ namespace Trivia
 
         public bool DidPlayerWin()
         {
-            return CurrentPlayer.GoldCoins != 6;
+            return CurrentPlayer.IsWinner();
         }
     }
 }

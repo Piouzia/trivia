@@ -120,7 +120,7 @@ namespace Trivia
                 }
 
                 _players.NextPlayer();
-                return true;
+                return false;
             }
 
             Console.WriteLine("Answer was corrent!!!!");
