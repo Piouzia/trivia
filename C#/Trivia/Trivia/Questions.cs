@@ -8,48 +8,55 @@ namespace Trivia
 {
     class Questions
     {
-        QuestionStack popQuestions;
-        QuestionStack scienceQuestions;
-        QuestionStack sportsQuestions;
-        QuestionStack rockQuestions;
+        readonly QuestionStack _popQuestions;
+        readonly QuestionStack _scienceQuestions;
+        readonly QuestionStack _sportsQuestions;
+        readonly QuestionStack _rockQuestions;
+
+        private readonly Dictionary<int, string> _categories = new Dictionary<int, string>() { { 0, "Pop" }, { 1, "Science" }, { 2, "Sports" }, { 3, "Rock" } };
 
         public Questions()
         {
-            popQuestions = new QuestionStack("Pop");
-            scienceQuestions = new QuestionStack("Science");
-            sportsQuestions = new QuestionStack("Sports");
-            rockQuestions = new QuestionStack("Rock");
+            _popQuestions = new QuestionStack("Pop");
+            _scienceQuestions = new QuestionStack("Science");
+            _sportsQuestions = new QuestionStack("Sports");
+            _rockQuestions = new QuestionStack("Rock");
         }
 
         public void GenerateQuestions()
         {
             for (var i = 0; i < 50; i++)
             {
-                popQuestions.Add(i);
-                scienceQuestions.Add(i);
-                sportsQuestions.Add(i);
-                rockQuestions.Add(i);
+                _popQuestions.Add(i);
+                _scienceQuestions.Add(i);
+                _sportsQuestions.Add(i);
+                _rockQuestions.Add(i);
             }
         }
 
-        public void AskQuestion(String type)
+        public void AskQuestion(int i)
         {
-            if (type == "Pop")
+            if (_categories[i] == "Pop")
             {
-                popQuestions.PickQuestion();
+                _popQuestions.PickQuestion();
             }
-            if (type == "Science")
+            if (_categories[i] == "Science")
             {
-                scienceQuestions.PickQuestion();
+                _scienceQuestions.PickQuestion();
             }
-            if (type == "Sports")
+            if (_categories[i] == "Sports")
             {
-                sportsQuestions.PickQuestion();
+                _sportsQuestions.PickQuestion();
             }
-            if (type == "Rock")
+            if (_categories[i] == "Rock")
             {
-                rockQuestions.PickQuestion();
+                _rockQuestions.PickQuestion();
             }
+        }
+
+        public string CurrentCategory(int i)
+        {
+            return _categories[i];
         }
     }
 }

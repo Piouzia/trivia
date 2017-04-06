@@ -7,33 +7,16 @@ namespace Trivia
     public class Game
     {
         private readonly Players _players;
-        private readonly Dictionary<int, string> _categories = new Dictionary<int, string>() {{0, "Pop"}, {1, "Science"}, {2, "Sports"}, {3, "Rock"}};
 
-        /*QuestionStack popQuestions = new QuestionStack("Pop");
-        QuestionStack scienceQuestions = new QuestionStack("Science");
-        QuestionStack sportsQuestions = new QuestionStack("Sports");
-        QuestionStack rockQuestions = new QuestionStack("Rock");*/
-
-        Questions questions = new Questions();
+        readonly Questions _questions = new Questions();
 
         private bool _isGettingOutOfPenaltyBox;
 
         public Game(Players p)
         {
             _players = p;
-            questions.GenerateQuestions();
+            _questions.GenerateQuestions();
         }
-
-        /*private void GenerateQuestions()
-        {
-            for (var i = 0; i < 50; i++)
-            {
-                popQuestions.Add(i);
-                scienceQuestions.Add(i);
-                sportsQuestions.Add(i);
-                rockQuestions.Add(i);
-            }
-        }*/
 
         public void Roll(int roll)
         {
@@ -52,8 +35,8 @@ namespace Trivia
                     Console.WriteLine(_players.CurrentPlayer.Name
                             + "'s new location is "
                             + _players.CurrentPlayer.Place);
-                    Console.WriteLine("The category is " + CurrentCategory());
-                    AskQuestion();
+                    Console.WriteLine("The category is " + _questions.CurrentCategory(_players.CurrentPlayer.Place % 4));
+                    _questions.AskQuestion(_players.CurrentPlayer.Place % 4);
                 }
                 else
                 {
@@ -69,22 +52,12 @@ namespace Trivia
                 Console.WriteLine(_players.CurrentPlayer.Name
                         + "'s new location is "
                         + _players.CurrentPlayer.Place);
-                Console.WriteLine("The category is " + CurrentCategory());
-                AskQuestion();
+                Console.WriteLine("The category is " + _questions.CurrentCategory(_players.CurrentPlayer.Place % 4));
+                _questions.AskQuestion(_players.CurrentPlayer.Place % 4);
             }
 
         }
 
-        private void AskQuestion()
-        {
-            questions.AskQuestion(CurrentCategory());
-        }
-
-
-        private string CurrentCategory()
-        {
-            return _categories[_players.CurrentPlayer.Place % 4];
-        }
 
         public bool WasCorrectlyAnswered()
         {
